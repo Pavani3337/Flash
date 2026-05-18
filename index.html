@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Flashcard Study App</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<div class="container">
+
+<h1>📚 Flashcard Study App</h1>
+
+<!-- ADD FLASHCARD -->
+<div class="addBox">
+    <input id="question" placeholder="Enter Question">
+    <input id="answer" placeholder="Enter Answer">
+    <button onclick="addCard()">Add Card</button>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+    <button onclick="prevCard()">⬅ Prev</button>
+    <button onclick="flipCard()">🔄 Flip</button>
+    <button onclick="nextCard()">Next ➡</button>
+</div>
+
+<!-- CARD DISPLAY -->
+<div id="card" class="card">
+    Click “Add Card” to start
+</div>
+
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>
