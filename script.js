@@ -1,6 +1,16 @@
-let cards = JSON.parse(localStorage.getItem("flashcards")) || [];
+let cards = [];
 let index = 0;
 let flipped = false;
+
+// LOAD FROM STORAGE FIRST
+function loadCards() {
+    let stored = localStorage.getItem("flashcards");
+    if (stored) {
+        cards = JSON.parse(stored);
+    } else {
+        cards = [];
+    }
+}
 
 // SAVE TO STORAGE
 function saveCards() {
@@ -10,10 +20,10 @@ function saveCards() {
 // ADD CARD
 function addCard() {
 
-    let q = document.getElementById("question").value;
-    let a = document.getElementById("answer").value;
+    let q = document.getElementById("question").value.trim();
+    let a = document.getElementById("answer").value.trim();
 
-    if (q === "" || a === "") return;
+    if (!q || !a) return;
 
     cards.push({ q, a });
 
@@ -30,15 +40,14 @@ function addCard() {
 // SHOW CARD
 function showCard() {
 
+    let box = document.getElementById("card");
+
     if (cards.length === 0) {
-        document.getElementById("card").innerText = "No flashcards yet";
+        box.innerText = "No flashcards yet";
         return;
     }
 
-    let card = cards[index];
-
-    document.getElementById("card").innerText =
-        flipped ? card.a : card.q;
+    box.innerText = flipped ? cards[index].a : cards[index].q;
 }
 
 // FLIP
@@ -67,10 +76,10 @@ function prevCard() {
     }
 }
 
-// AUTO LOAD WHEN PAGE OPENS
+// INIT APP
 window.onload = function () {
-    if (cards.length > 0) {
-        index = 0;
-        showCard();
-    }
+    loadCards();
+    index = 0;
+    flipped = false;
+    showCard();
 };
